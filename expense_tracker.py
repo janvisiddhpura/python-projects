@@ -60,6 +60,5 @@ while True:
 
     # invalid choise
     else:
-        print("\n❌ Invaid choice! Please try again!")
+        print("\n❌ Invaid choice! Please try again!\n")
         break
-
