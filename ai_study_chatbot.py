@@ -3,6 +3,7 @@
 # an extra feature added by me: when user say sad: there will be another conversation comes
 
 import datetime
+import time 
 
 name = input("\nWelcome, Please Enter your name: ")
 present_hour = datetime.datetime.now().hour
@@ -37,24 +38,29 @@ responses = {
 }
 
 def get_response_bot(user_question):
+    print("Thinking...", end="", flush=True)
+    time.sleep(1)
+    print("\r" + " " * len("Thinking...") + "\r", end="", flush=True)
     for each_key in responses:
         if each_key in user_question:
             if user_question == "sad":
-                print("Bot:",responses[each_key], end="")
+                print("Bot:", responses[each_key], end="")
                 res = input(" Do you want to talk about it? Press y/n: ").lower()
                 if res == "y":
                     input("\n🎤 Please explain: ")
-                    return "\033[1m"+"No worries! \nI believe you're very strong and True strength is getting back up and trying again every single time!"+"\033[0m"
+                    return "\033[1m" + "No worries! \nI believe you're very strong and True strength is getting back up and trying again every single time!" + "\033[0m"
                 elif res == "n":
-                    return "Not an issue! But you can one this beautiful thing... \n"+"\033[1m"+"The successful warrior is the average man, with laser-like focus."+"\033[0m"
-            else:  
-                return responses[each_key]        
+                    return "Not an issue! But you can one this beautiful thing... \n" + "\033[1m" + "The successful warrior is the average man, with laser-like focus." + "\033[0m"
+            else:
+                return responses[each_key]
     return "I am not able to tell that yet. Soon, I will learn it!"
 
 # take user input
 while True:
-    user_input = input("\nYou: ")
-    reply = get_response_bot(user_input.lower())
-    print("Bot:", reply)
-    if "bye" in user_input.lower():
+    user_input = input("\nYou: ").strip().lower()
+    if user_input == "bye":
+        print("Bot: Bye! See you soon!🤝\n")
         break
+
+    reply = get_response_bot(user_input)
+    print("Bot:", reply)
