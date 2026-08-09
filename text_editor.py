@@ -44,6 +44,20 @@ def save_file():
         with open(file_path, "w") as file:
             file.write(text_area.get(1.0, tk.END))
     messagebox.showinfo("Save File", "File saved successfully!")
-    
+
+# create menu bar
+menu_bar = tk.Menu(root)
+# create file menu
+root.config(menu=menu_bar)
+file_menu = tk.Menu(menu_bar, tearoff=0)
+# menu options
+menu_bar.add_cascade(label="File", menu = file_menu)
+
+file_menu.add_command(label="New", command=new_file)
+file_menu.add_command(label="Open", command=open_file)
+file_menu.add_command(label="Save", command=save_file)
+file_menu.add_separator()
+file_menu.add_command(label="Exit", command=root.quit)
+
 # initiates and keep the window open until user closes it
 root.mainloop()
