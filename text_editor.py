@@ -47,12 +47,14 @@ def save_file():
 
 # create menu bar
 menu_bar = tk.Menu(root)
+
 # create file menu
 root.config(menu=menu_bar)
 file_menu = tk.Menu(menu_bar, tearoff=0)
-# menu options
-menu_bar.add_cascade(label="File", menu = file_menu)
 
+# menu heading
+menu_bar.add_cascade(label="File", menu = file_menu)
+# menu options
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
