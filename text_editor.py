@@ -18,6 +18,20 @@ text_area.pack(expand=True, fill=tk.BOTH)
 # create a new file
 def new_file():
     text_area.delete(1.0, tk.END)
+
+# open an existing file
+def open_file():
+    # open file dialog to select a file
+    file_path = filedialog.askopenfilename(
+        defaultextension=".txt",
+        filetypes=[("Text Files", "*.txt")]
+    )
+    if file_path:
+        # open the file and read its content
+        with open(file_path, "r") as file:
+            content = file.read()
+            text_area.delete(1.0, tk.END)
+            text_area.insert(tk.END, content)
     
 # initiates and keep the window open until user closes it
 root.mainloop()
