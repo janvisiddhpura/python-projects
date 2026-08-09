@@ -29,9 +29,21 @@ def open_file():
     if file_path:
         # open the file and read its content
         with open(file_path, "r") as file:
-            content = file.read()
             text_area.delete(1.0, tk.END)
-            text_area.insert(tk.END, content)
+            text_area.insert(tk.END, file.read())
+
+# save the current file
+def save_file():
+    # open file dialog to select a file
+    file_path = filedialog.asksaveasfilename(
+        defaultextension=".txt",
+        filetypes=[("Text Files", "*.txt")]
+    )
+    if file_path:
+        # save the content of the text area to the file
+        with open(file_path, "w") as file:
+            file.write(text_area.get(1.0, tk.END))
+    messagebox.showinfo("Save File", "File saved successfully!")
     
 # initiates and keep the window open until user closes it
 root.mainloop()
