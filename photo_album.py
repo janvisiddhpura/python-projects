@@ -25,4 +25,11 @@ for path in image_paths:
     img = img.resize((800, 800))
     images.append(img)
 
+# convert PIL image to ImageTk format for tkinter
+final_img = []
+for img in images:
+    photo = ImageTk.PhotoImage(img)
+    final_img.append(photo)
+
+
 root.mainloop()
