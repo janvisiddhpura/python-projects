@@ -35,4 +35,13 @@ for img in images:
 image_label = tk.Label(root, bg="black")
 image_label.pack(pady = 30)
 
+# play button to start the slideshow
+play_button = tk.Button(
+    root, 
+    text="Play Slideshow",
+    font = ("Arial", 14),
+    command=show_images
+)
+play_button.pack(pady = 20)
+
 root.mainloop()
