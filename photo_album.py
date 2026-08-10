@@ -35,6 +35,13 @@ for img in images:
 image_label = tk.Label(root, bg="black")
 image_label.pack(pady = 30)
 
+# display the images in a loop
+def show_images():
+    for img in final_img:
+        image_label.config(image=img)
+        root.update()
+        time.sleep(2)
+        
 # play button to start the slideshow
 play_button = tk.Button(
     root, 
