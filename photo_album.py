@@ -31,5 +31,8 @@ for img in images:
     photo = ImageTk.PhotoImage(img)
     final_img.append(photo)
 
+# label to display the images
+image_label = tk.Label(root, bg="black")
+image_label.pack(pady = 30)
 
 root.mainloop()
