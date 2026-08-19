@@ -9,7 +9,7 @@ hard_words = ["elephant", "diamond", "umbrella", "computer", "mountain", "diamet
 
 attempts = 0
 max_hints = 0
-hint_dict = {}
+hints = {}
 hint_count = 0
 failed_attempts = 0
 found_new_char = False
@@ -57,11 +57,11 @@ def take_user_input(current_state):
 
 # place the hint from dict
 def get_secret_hint(guess, hint):
-    global hint_count, hint_dict
+    global hint_count, hints
     for i in range(len(secret)):
-        if guess[i] == secret[i] and guess[i] not in hint_dict.values():
+        if guess[i] == secret[i] and guess[i] not in hints.values():
             hint += guess[i]
-            hint_dict[i] = guess[i]
+            hints[i] = guess[i]
             hint_count += 1
         else:
             hint += " _ "
@@ -69,7 +69,7 @@ def get_secret_hint(guess, hint):
 
 # checks the entered user guess
 def validate_guess():
-    global max_hints, attempts, hint_dict
+    global max_hints, attempts, hints
     while True:
         if attempts >= max_hints:
             guess = input("\nGuess (or type 'quit' to exit): ")        
@@ -97,14 +97,14 @@ def validate_guess():
 
 # foundation of the secret
 def form_secret():    
-    global attempts, hint_count, hint_dict, failed_attempts, found_new_char
+    global attempts, hint_count, hints, failed_attempts, found_new_char
     while True:
         hint = ""
         found_new_char = False
         attempts += 1       
         guess = validate_guess()    
         if guess == secret:
-            print(f"\n🎉 Congrats! You guessed it in {attempts} attempts!\n")
+            print(f"\n🎉 Congrats! You guessed it in \033[1m{attempts}\033[0m attempts!\n")
             break        
         elif len(guess) == len(secret):
             if attempts <= 2:
@@ -121,7 +121,7 @@ def form_secret():
                         # check for more occurances of characters in a word
                         hint_char = random.choice(secret).lower()
                         hint_index = secret.find(hint_char)
-                        hint_dict[hint_index] = hint_char
+                        hints[hint_index] = hint_char
                         for i in range(len(secret)):
                             if i == hint_index:
                                 hint += hint_char
@@ -138,7 +138,7 @@ def form_secret():
                     hint = ""
                     for i in range(len(secret)):
                         if guess[i] == secret[i]:                            
-                            if i not in hint_dict.keys():
+                            if i not in hints.keys():
                                 found_new_char = True
                                 failed_attempts = 0
                     # match in entire guess
@@ -148,12 +148,12 @@ def form_secret():
                         failed_attempts += 1
                         found_new_char = False
                     for i in range(len(secret)):
-                        if guess[i] == secret[i] and i not in hint_dict.keys():
-                            hint_dict[i] = guess[i]
+                        if guess[i] == secret[i] and i not in hints.keys():
+                            hints[i] = guess[i]
                             hint_count += 1
                     for i in range(len(secret)):                    
-                        if secret[i] == hint_dict.get(i):
-                            hint += hint_dict.get(i)              
+                        if secret[i] == hints.get(i):
+                            hint += hints.get(i)              
                         else:
                             hint += " _ "
                     # hints after 2 incorrect attempts
@@ -161,8 +161,8 @@ def form_secret():
                         failed_attempts = 0
                         hint = ""
                         for i in range(len(secret)):
-                            if guess[i] == secret[i] and i not in hint_dict.keys():
-                                hint_dict[i] = guess[i]
+                            if guess[i] == secret[i] and i not in hints.keys():
+                                hints[i] = guess[i]
                                 hint_count += 1                        
                         print("\n💡 Need more help?")
                         print("1️⃣  Yes, give me a hint!")
@@ -170,14 +170,14 @@ def form_secret():
                         ask = take_user_input("hint")
                         if ask == 1:
                             # check for more occurances of characters in a word
-                            available_indexes = [i for i in range(len(secret)) if i not in hint_dict]
+                            available_indexes = [i for i in range(len(secret)) if i not in hints]
                             hint_index = random.choice(available_indexes)
                             hint_char = secret[hint_index]
-                            hint_dict[hint_index] = hint_char
+                            hints[hint_index] = hint_char
                             hint_count += 1
                             for i in range(len(secret)):                    
-                                if secret[i] == hint_dict.get(i):
-                                    hint += hint_dict.get(i)              
+                                if secret[i] == hints.get(i):
+                                    hint += hints.get(i)              
                                 else:
                                     hint += " _ "
                             print("Hint: ", hint)
@@ -185,7 +185,7 @@ def form_secret():
                         elif ask == 2:
                             break
                     # reached at the max hints
-                    elif hint_count == max_hints and len(hint_dict) != len(secret):
+                    elif hint_count == max_hints and len(hints) != len(secret):
                         print("\n💡 \033[1mYou've used all the available hints!\033[0m")
                         print("🎯 Do you want to keep guessing or quit the game?")
                         print("1️⃣  Continue guessing")
@@ -198,8 +198,8 @@ def form_secret():
                             print(f"🔐 The secret word was: {secret}")
                             break
                     # already reached at the secret
-                    if len(hint_dict.items()) == len(secret):
-                        if all(char in hint_dict.values() for char in secret) and guess != hint:
+                    if len(hints.items()) == len(secret):
+                        if all(char in hints.values() for char in secret) and guess != hint:
                             print(f"\n🧩 Well Done! You've pieced together the entire word: \033[1m{secret}\033[0m")
                             if hint == secret:
                                 print(f"\n🎉 Congrats! You guessed it in \033[1m{attempts}\033[0m attempts!\n")
