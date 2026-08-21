@@ -1,4 +1,10 @@
-# digital clock
+"""
+╔═════════════════════════════════════════╗
+║            🕛 DIGITAL CLOCK             ║
+╚═════════════════════════════════════════╝
+A simple Python GUI application built with Tkinter that displays
+the current day, date, and time in a digital clock format.
+"""
 import time
 import tkinter as tk
 
