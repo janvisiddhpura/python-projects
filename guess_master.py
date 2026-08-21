@@ -1,4 +1,12 @@
-# A text-based word guessing game - GuessMaster
+"""
+╔═══════════════════════════════════════╗
+║            🔎 GUESS MASTER            ║
+╚═══════════════════════════════════════╝
+A terminal-based Python game where players select a category
+and attempt to discover a randomly selected hidden word.
+Characters matching the player's guesses are progressively
+revealed until the complete word is discovered.
+"""
 
 import random
 import sys
@@ -208,7 +216,11 @@ def form_secret():
                         print("Hint: ", hint)
 
 # main base starts here
-print("\n----- 🎯 Word Guessing Game -----\n")
+print("""
+╔═══════════════════════════════════════╗
+║            🎯 GUESS MASTER            ║
+╚═══════════════════════════════════════╝
+""")
 print("📊 The Difficulty Levels:")
 print("1️⃣  Easy")
 print("2️⃣  Medium")
