@@ -47,7 +47,7 @@ while True:
         # 2. view all expense
         elif choice == 2:
             if len(expenseList) == 0:
-                print("\n⚠ No Expense Added!")
+                print("\n⛔ No Expense Added!")
             else:
                 print("\n📋 All Expenses")
                 count = 1
