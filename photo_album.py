@@ -1,4 +1,12 @@
-# slideshow of images using tkinter and PIL
+"""
+╔═══════════════════════════════════════════════╗
+║            🖼️ SLIDESHOW OF IMAGES             ║
+╚═══════════════════════════════════════════════╝
+An image slideshow using Tkinter and PIL (Pillow). 
+It displays a collection of images one by one and 
+automatically changes to the next image after a fixed interval.
+"""
+
 import tkinter as tk
 import time
 from PIL import Image, ImageTk
