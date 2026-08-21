@@ -1,11 +1,21 @@
-# a conversational AI assistant using Python’s core logic - string matching, functions, dictionaries, and loops.
-# rule-based python AI chatbot
-# an extra feature added by me: when user say sad: there will be another conversation comes
+"""
+╔════════════════════════════════════════════════╗
+║            🤖 RULE-BASED AI CHATBOT            ║
+╚════════════════════════════════════════════════╝
+A conversational assistant built with Python's core logic, 
+using string matching, functions, dictionaries, and loops, 
+with an extra feature that triggers a different conversation flow when the user expresses sadness.
+"""
 
 import datetime
 import time 
 
-name = input("\nWelcome, Please Enter your name: ")
+print("""
+╔════════════════════════════════════════════════╗
+║            🤖 RULE-BASED AI CHATBOT            ║
+╚════════════════════════════════════════════════╝
+""")
+name = input("\nEnter your name: ")
 present_hour = datetime.datetime.now().hour
 
 if 5 <= present_hour <= 11:
@@ -20,7 +30,7 @@ else:
 print("\n🤖 Hello, Welcome to the ChatBot!")
 print("You can ask me basic questions, Type 'bye' to exit from the bot. ")
 
-# chatbot memory creation[dictionary of responses]
+# chatbot memory creation
 responses = {
     "hello": "Hi, welcome! How can I help you?",
     "how are you": 'I am very fine. Thank you.',
@@ -59,7 +69,7 @@ def get_response_bot(user_question):
 while True:
     user_input = input("\nYou: ").strip().lower()
     if user_input == "bye":
-        print("Bot: Bye! See you soon!🤝\n")
+        print("Bot: Bye! See you soon!👋\n")
         break
 
     reply = get_response_bot(user_input)
