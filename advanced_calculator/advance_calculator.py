@@ -1,23 +1,29 @@
-# Calculator with History
-# future features:
-# - multiple operation: logical, comparision, trigonometric, etc.
-# - save calculation history to a file
-# - load calculation history from a file
-# - history, clear, exit
-# modulus, exponentiation, floor division, etc.
-# multinumber input, e.g. 1 + 2 + 3 + 4, can use eval() function
+"""
+╔══════════════════════════════════════════════╗
+║            🧮 Advanced Calculator            ║
+╚══════════════════════════════════════════════╝
+A console-based calculator that performs mathematical calculations 
+while providing a menu-driven interface with calculation history, 
+history management, and an option to exit the application.
+"""
 
 HISTORY_FILE = "history.txt"
 
 def display_history():
-    with open(HISTORY_FILE, "r") as file:
-        lines = file.readlines()
-        if len(lines) == 0:
-            print("No hisory found!")
-        else:
-            for line in reversed(lines):
-                print(line.strip())
-        file.close()
+    try:
+        with open(HISTORY_FILE, "r") as file:
+            lines = file.readlines()
+            if len(lines) == 0:
+                print("📭 No history found!")
+            else:
+                count = 1
+                print("📜  History\n")
+                for line in reversed(lines):                    
+                    print(count, " → ", line.strip())
+                    count += 1
+            file.close()
+    except:
+        print("⛔ The file does not exist!\nPlease calculate something to add inside the file!")
 
 def clear_history():
     # opens as write mode
@@ -36,7 +42,7 @@ def save_to_history(equation, result):
 def calculator(user_input):
     tokens = user_input.split()
     if len(tokens) != 3:
-        print("Invalid input!\nPlease enter in the format: (e.g., 2 + 3)")
+        print("❌ Invalid input!\nPlease enter in the format: (e.g., 2 + 3)")
         return
 
     operand1 = float(tokens[0])
@@ -51,7 +57,7 @@ def calculator(user_input):
         result = operand1 * operand2
     elif operator == "/":
         if operand2 == 0:
-            print("Can't divide with Zero!")
+            print("➗ Can't divide with Zero!")
             return
         result = operand1 / operand2
     elif operator == "%":
@@ -63,28 +69,40 @@ def calculator(user_input):
     if int(result) == result:
         result = int(result)
 
-    print("Result: ", result)
+    print("📊 Result: ", result)
     save_to_history(user_input, result)
 
 def main():
-    print("\n------ 🧮 ADVANCE CALCULATOR ------\n")
-    print("1. Calculate")
-    print("2. View History")
-    print("3. Clear History")
-    print("4. Exit")
-    while True:
-        choice = int(input("\n🔢 Enter you choice(1-4): "))
+    print("""
+    ╔══════════════════════════════════════════════╗
+    ║            🧮 Advanced Calculator            ║
+    ╚══════════════════════════════════════════════╝
+    """)
+    print("1️⃣  ⚙️  Calculate")
+    print("2️⃣  📜 View History")
+    print("3️⃣  🗑️  Clear History")
+    print("4️⃣  🚪 Exit")
 
-        if choice == 1:
-            user_input = input("Enter the equation (e.g., 2 + 4): ")
-            calculator(user_input)
-        elif choice == 2:
-            display_history()
-        elif choice == 3:
-            clear_history()
-        elif choice == 4:
-            print("Goodbye!\n")
-            break
+    while True:
+
+        choice = input("\nEnter you choice: ")
+
+        if not choice.isdigit():
+            print("\nPlease enter only a digit! 🔢")
+            continue
+
         else:
-            print("Please enter valid choice!")
+            choice = int(choice)
+            if choice == 1:
+                user_input = input("\n📌 Enter the equation (e.g., 2 + 4): ")
+                calculator(user_input)
+            elif choice == 2:
+                display_history()
+            elif choice == 3:
+                clear_history()
+            elif choice == 4:
+                print("\n👋 Thank you for using the Calculator!\n")
+                break
+            else:
+                print("\n❌ Please enter valid choice!")
 main()
