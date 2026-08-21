@@ -1,4 +1,12 @@
-# creating a text editor using tkinter
+"""
+╔═══════════════════════════════════════╗
+║            📝 TEXT EDITOR             ║
+╚═══════════════════════════════════════╝
+A simple text editor using Python and Tkinter. 
+It allows users to create, open, edit,
+and save text files.
+"""
+
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
